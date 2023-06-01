@@ -4,15 +4,18 @@ import com.tayfundaldik.brewery.services.v2.BeerServiceV2;
 import com.tayfundaldik.brewery.web.model.v2.BeerDtoV2;
 import jakarta.validation.ConstraintViolationException;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.NotNull;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+@Validated
 @RequestMapping("/api/v2/beer")
 @RestController
 public class BeerControllerV2 {
@@ -23,12 +26,12 @@ public class BeerControllerV2 {
     }
 
     @GetMapping("/{beerId}")
-    public ResponseEntity<BeerDtoV2> getBeer(@PathVariable("beerId") UUID beerId){
+    public ResponseEntity<BeerDtoV2> getBeer(@NotNull @PathVariable("beerId") UUID beerId){
         return new ResponseEntity<>(beerServiceV2.getBeerByID(beerId), HttpStatus.OK);
 
     }
     @PostMapping
-    public ResponseEntity handlePost (@Valid @RequestBody BeerDtoV2 beerDto){
+    public ResponseEntity handlePost (@Valid @NotNull @RequestBody BeerDtoV2 beerDto){
         BeerDtoV2 savedDto = beerServiceV2.savedBeer(beerDto);
         HttpHeaders headers =new HttpHeaders();
 //        todo add hostname to url
