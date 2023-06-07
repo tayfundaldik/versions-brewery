@@ -1,8 +1,6 @@
-package com.tayfundaldik.brewery.web.model.v2;
+package com.tayfundaldik.brewery.domain;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Null;
-import jakarta.validation.constraints.Positive;
+import com.tayfundaldik.brewery.web.model.v2.BeerStyleEnum;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,18 +12,9 @@ import java.util.UUID;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class BeerDtoV2 {
-
-    @Null
+public class Beer {
     private UUID id ;
-
-    @NotBlank
     private String beerName;
-
-    @NotBlank
     private BeerStyleEnum beerStyle;
-
-
-    @Positive
     private Long upc;
 }

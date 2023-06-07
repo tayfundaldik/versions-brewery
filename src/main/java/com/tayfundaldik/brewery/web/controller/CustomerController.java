@@ -44,12 +44,5 @@ public class CustomerController {
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void deleteBeer(@PathVariable("customerId") UUID customerId){customerService.deleteById(customerId);}
 
-    @ExceptionHandler(ConstraintViolationException.class)
-    public ResponseEntity<List> ErrorHandler(ConstraintViolationException e){
-        List<String> errors =new ArrayList<>(e.getConstraintViolations().size());
-        e.getConstraintViolations().forEach(constraintViolation -> {
-            errors.add(constraintViolation.getPropertyPath()+ " : "+ constraintViolation.getMessage());
-    });
-        return new ResponseEntity<>(errors,HttpStatus.BAD_REQUEST);
-   }
+
 }
